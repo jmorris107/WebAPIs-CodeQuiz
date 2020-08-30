@@ -2,6 +2,7 @@
 var currentQuestionIndex = 0;
 var time = questions.length * 15;
 var timerId;
+var reduceTime = time -5;
 
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
@@ -13,7 +14,7 @@ var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
 
 // sound effects
-var sfxRight = new Audio("assets/sfx/correct.wav");
+var sfxRight = new Audio("/Users/jennifermorris/development/WebAPIs-CodeQuiz/correct.wav");
 var sfxWrong = new Audio("assets/sfx/incorrect.wav");
 
 function startQuiz() {
@@ -72,10 +73,19 @@ function questionClick() {
     // add 1 to the number of correct guesses
     feedbackEl.style.display = "block";
     feedbackEl.textContent = "Correct!";
+    getQuestion();
+    console.log(getQuestion)
     // add 1 to currentQuestionIndex
     // call the get questions function again
  }
+    else {
+    feedbackEl.style.display = "block";
+    feedbackEl.textContent = "Incorrect...";
+    time = time -5;
+    timerEl.textContent = time;
+  }
   // penalize time
+
   // display new time on page
   // play "wrong" sound effect
   // else
