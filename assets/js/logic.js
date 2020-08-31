@@ -14,8 +14,8 @@ var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
 
 // sound effects
-var sfxRight = new Audio("/Users/jennifermorris/development/WebAPIs-CodeQuiz/correct.wav");
-var sfxWrong = new Audio("assets/sfx/incorrect.wav");
+var sfxRight = new Audio("../../04-Web-APIs_02-Homework_Develop_assets_sfx_correct.wav");
+var sfxWrong = new Audio("../../04-Web-APIs_02-Homework_Develop_assets_sfx_incorrect.wav");
 
 function startQuiz() {
   // hide start screen
@@ -73,16 +73,22 @@ function questionClick() {
     // add 1 to the number of correct guesses
     feedbackEl.style.display = "block";
     feedbackEl.textContent = "Correct!";
-    getQuestion();
-    console.log(getQuestion)
+    sfxRight.play();
     // add 1 to currentQuestionIndex
+    currentQuestionIndex = currentQuestionIndex + 1
     // call the get questions function again
+    getQuestion(); 
  }
     else {
     feedbackEl.style.display = "block";
     feedbackEl.textContent = "Incorrect...";
+    sfxWrong.play();
     time = time -5;
     timerEl.textContent = time;
+    // add 1 to currentQuestionIndex
+    currentQuestionIndex = currentQuestionIndex + 1
+     // call the get questions function again
+     getQuestion(); 
   }
   // penalize time
 
