@@ -73,35 +73,36 @@ function questionClick() {
     // add 1 to the number of correct guesses
     feedbackEl.style.display = "block";
     feedbackEl.textContent = "Correct!";
+    // play "right" sound effect
     sfxRight.play();
     // add 1 to currentQuestionIndex
     currentQuestionIndex = currentQuestionIndex + 1
     // call the get questions function again
+      // move to next question
     getQuestion(); 
  }
     else {
     feedbackEl.style.display = "block";
     feedbackEl.textContent = "Incorrect...";
+    // play "wrong" sound effect
     sfxWrong.play();
+     // penalize time
     time = time -5;
+    // display new time on page
     timerEl.textContent = time;
     // add 1 to currentQuestionIndex
     currentQuestionIndex = currentQuestionIndex + 1
      // call the get questions function again
+       // move to next question
      getQuestion(); 
   }
-  // penalize time
 
-  // display new time on page
-  // play "wrong" sound effect
-  // else
-  // play "right" sound effect
+
   // flash right/wrong feedback on page for half a second
-  // move to next question
+  
   // check if we've run out of questions
   // quizEnd
-  // else
-  // getQuestion
+ 
 }
 
 function quizEnd() {
