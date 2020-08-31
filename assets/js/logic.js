@@ -14,7 +14,7 @@ var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
 
 // sound effects
-var sfxRight = new Audio("assets/sfx/04-Web-APIs_02-Homework_Develop_assets_sfx_correct.wav");
+var sfxRight = new Audio("../../04-Web-APIs_02-Homework_Develop_assets_sfx_correct.wav");
 var sfxWrong = new Audio("../../04-Web-APIs_02-Homework_Develop_assets_sfx_incorrect.wav");
 
 function startQuiz() {
