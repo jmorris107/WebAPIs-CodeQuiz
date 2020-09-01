@@ -100,15 +100,10 @@ function questionClick() {
     getQuestion();
   }
 }
-
-
-  // flash right/wrong feedback on page for half a second
-  
-
-  // quizEnd
  
 }
 
+  //quiz End
 function quizEnd() {
     // stop timer
   clearInterval(timerId);
