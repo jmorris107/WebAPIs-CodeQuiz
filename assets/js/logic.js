@@ -90,26 +90,40 @@ function questionClick() {
     time = time -5;
     // display new time on page
     timerEl.textContent = time;
-    // add 1 to currentQuestionIndex
-    currentQuestionIndex = currentQuestionIndex + 1
-     // call the get questions function again
-       // move to next question
-     getQuestion(); 
+    // add 1 to currentQuestionIndex 
+    currentQuestionIndex = currentQuestionIndex + 1 // // move to next question
+          
+  // check if we've run out of questions
+  if (currentQuestionIndex === questions.length) {
+    quizEnd();
+  } else {
+    getQuestion();
   }
+}
 
 
   // flash right/wrong feedback on page for half a second
   
-  // check if we've run out of questions
+
   // quizEnd
  
 }
 
 function quizEnd() {
-  // stop timer
+    // stop timer
+  clearInterval(timerId);
+
   // show end screen
+  var endScreenEl = document.getElementById("end-screen");
+  endScreenEl.removeAttribute("class");
+
   // show final score
+  var finalScoreEl = document.getElementById("final-score");
+  finalScoreEl.textContent = time;
+  
   // hide questions section
+  questionsEl.setAttribute("class", "hide");
+
 }
 
 function clockTick() {
@@ -118,17 +132,35 @@ function clockTick() {
 }
 
 function saveHighscore() {
-  // get value of input box
+   // get value of input box
+  var initials = initialsEl.value.trim();
+  
   // make sure value wasn't empty
-  // get saved scores from localstorage, or if not any, set to empty array
-  // format new score object for current user
-  // save to localstorage
-  // redirect to next page
+  if (initials !== "") {
+    // get saved scores from localstorage, or if not any, set to empty array
+    var highscores =
+      JSON.parse(window.localStorage.getItem("highscores")) || [];
+    // format new score object for current user
+    var newScore = {
+      score: time,
+      initials: initials
+    };
+    
+    // save to localstorage
+    highscores.push(newScore);
+    window.localStorage.setItem("highscores", JSON.stringify(highscores));
+    
+    // redirect to next page
+    window.location.href = "highscores.html";
+  }
 }
 
 function checkForEnter(event) {
   // check if event key is enter
   // saveHighscore
+  if (event.key === "Enter") {
+    saveHighscore();
+  }
 }
 
 // user clicks button to submit initials
