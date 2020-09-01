@@ -127,8 +127,14 @@ function quizEnd() {
 }
 
 function clockTick() {
-  // update time
+ // update time
+  time--;
+  timerEl.textContent = time;
+  
   // check if user ran out of time
+  if (time <= 0) {
+    quizEnd();
+  }
 }
 
 function saveHighscore() {
