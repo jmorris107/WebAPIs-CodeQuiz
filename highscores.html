@@ -1,53 +1,24 @@
-function printHighscores() {
-  // either get scores from localstorage or set to empty array
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Highscores</title>
 
-  // (optional) sort highscores by score property in descending order
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
 
-  // for each score
-    // create li tag for each high score
+  <body>
+    <div class="wrapper">
+      <h1>Highscores</h1>
+      <ol id="highscores"></ol>
 
-    // display on page
-}
+      <a href="index.html"><button>Go Back</button></a>
+      <button id="clear">Clear Highscores</button>
+    </div>
 
-function clearHighscores() {
-  // (and reload)
-}
+    <script src="./assets/js/scores.js"></script>
+  </body>
+</html>
 
-// attache clear event to clear score button
-clearScores.addEventListener("click", function () {
-    clearAll();
-    window.location.href = "highscores.html";
-})
-backButton.addEventListener("click", function () {
-    window.location.href = "index.html";
-})
-
-// run printhighscore when page loads
-
-var restartBtn = document.querySelector("button.restartBtn"),
-    clearBtn = document.querySelector("button.clearBtn"),
-    // get the highScores list and turn it back into an object
-    highScores = JSON.parse(localStorage.getItem("highScores") || "[]"),
-    scoreList = document.getElementById("score-list");
-
-    // sort scores from high to low
-    highScores.sort(function (a,b){
-        return b.score - a.score
-    })
-
-    // display the scores
-    for (var s = 0; s < highScores.length; s++) {
-        var newLi = document.createElement("li")
-        newLi.textContent = highScores[s].name + " - " + highScores[s].score
-        scoreList.appendChild(newLi)
-    }
-
-
-// click handlers for restart and clearing scoreboard
-clearBtn.addEventListener("click", function () {
-    localStorage.clear();
-    history.back()
-});
-restartBtn.addEventListener("click", function () {
-    history.back();
-});
