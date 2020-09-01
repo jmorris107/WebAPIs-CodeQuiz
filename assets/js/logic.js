@@ -12,6 +12,7 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
+var addingScore = 0
 
 // sound effects
 var sfxRight = new Audio("../../04-Web-APIs_02-Homework_Develop_assets_sfx_correct.wav");
@@ -75,6 +76,8 @@ function questionClick() {
     feedbackEl.textContent = "Correct!";
     // play "right" sound effect
     sfxRight.play();
+    addingScore += 1
+    document.getElementById('scores').textContent=addingScore
     // add 1 to currentQuestionIndex
     currentQuestionIndex = currentQuestionIndex + 1
     // call the get questions function again
@@ -106,6 +109,7 @@ function questionClick() {
 }
 
 function quizEnd() {
+  document.getElementById('end-screen').style.display = 'block'
   // stop timer
   // show end screen
   // show final score
