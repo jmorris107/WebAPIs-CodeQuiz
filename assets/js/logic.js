@@ -12,7 +12,6 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
-var addingScore = 0
 
 // sound effects
 var sfxRight = new Audio("../../04-Web-APIs_02-Homework_Develop_assets_sfx_correct.wav");
@@ -76,8 +75,6 @@ function questionClick() {
     feedbackEl.textContent = "Correct!";
     // play "right" sound effect
     sfxRight.play();
-    addingScore += 1
-    document.getElementById('scores').textContent=addingScore
     // add 1 to currentQuestionIndex
     currentQuestionIndex = currentQuestionIndex + 1
     // call the get questions function again
@@ -93,46 +90,167 @@ function questionClick() {
     time = time -5;
     // display new time on page
     timerEl.textContent = time;
-    // add 1 to currentQuestionIndex
-    currentQuestionIndex = currentQuestionIndex + 1
-     // call the get questions function again
-       // move to next question
-     getQuestion(); 
+    // add 1 to currentQuestionIndex 
+    currentQuestionIndex = currentQuestionIndex + 1 // // move to next question
+          
+  // check if we've run out of questions
+  if (currentQuestionIndex === questions.length) {
+    quizEnd();
+  } else {
+    getQuestion();
   }
+}
+ 
+}
+
+  //quiz End
+function quizEnd() {
+    // stop timer
+  clearInterval(timerId);
+
+  // show end screen
+  var endScreenEl = document.getElementById("end-screen");
+  endScreenEl.removeAttribute("class");
+
+  // show final score
+  var finalScoreEl = document.getElementById("final-score");
+  finalScoreEl.textContent = time;
+  
+  // hide questions section
+  questionsEl.setAttribute("class", "hide");
+
+}
+
+function clockTick() {
+ // update time
+  time--;
+  timerEl.textContent = time;
+  
+  // check if user ran out of time
+  if (time <= 0) {
+    quizEnd();
+  }
+}
+
+function saveHighscore() {
+   // get value of input box
+  var initials = initialsEl.value.trim();
+  
+  // make sure value wasn't empty
+  if (initials !== "") {
+    // get saved scores from localstorage, or if not any, set to empty array
+    var highscores =
+      JSON.parse(window.localStorage.getItem("highscores")) || [];
+    // format new score object for current user
+    var newScore = {
+      score: time,
+      initials: initials
+    };
+    
+    // save to localstorage
+    highscores.push(newScore);
+    window.localStorage.setItem("highscores", JSON.stringify(highscores));
+    
+    // redirect to next page
+    window.location.href = "highscores.html";
+  }
+}
+
+function checkForEnter(event) {
+  // check if event key is enter
+  // saveHighscore
+  if (event.key === "Enter") {
+    saveHighscore();
+  }
+}
+
+// user clicks button to submit initials
+submitBtn.onclick = saveHighscore;
+
+// user clicks button to start quiz
+startBtn.onclick = startQuiz;
+
+initialsEl.onkeyup = checkForEnter;
 
 
   // flash right/wrong feedback on page for half a second
   
   // check if we've run out of questions
   // quizEnd
- 
-}
+    // add 1 to currentQuestionIndex 
+    currentQuestionIndex = currentQuestionIndex + 1 // // move to next question
+          
+  // check if we've run out of questions
+  if (currentQuestionIndex === questions.length) {
+    quizEnd();
+  } else {
+    getQuestion();
+  }
 
+  //quiz End
 function quizEnd() {
+
   document.getElementById('end-screen').style.display = 'block'
   // stop timer
+
+    // stop timer
+  clearInterval(timerId);
+
+
   // show end screen
+  var endScreenEl = document.getElementById("end-screen");
+  endScreenEl.removeAttribute("class");
+
   // show final score
+  var finalScoreEl = document.getElementById("final-score");
+  finalScoreEl.textContent = time;
+  
   // hide questions section
+  questionsEl.setAttribute("class", "hide");
+
 }
 
 function clockTick() {
-  // update time
+ // update time
+  time--;
+  timerEl.textContent = time;
+  
   // check if user ran out of time
+  if (time <= 0) {
+    quizEnd();
+  }
 }
 
 function saveHighscore() {
-  // get value of input box
+   // get value of input box
+  var initials = initialsEl.value.trim();
+  
   // make sure value wasn't empty
-  // get saved scores from localstorage, or if not any, set to empty array
-  // format new score object for current user
-  // save to localstorage
-  // redirect to next page
+  if (initials !== "") {
+    // get saved scores from localstorage, or if not any, set to empty array
+    var highscores =
+      JSON.parse(window.localStorage.getItem("highscores")) || [];
+    // format new score object for current user
+    var newScore = {
+      score: time,
+      initials: initials
+    };
+    
+    // save to localstorage
+    highscores.push(newScore);
+    window.localStorage.setItem("highscores", JSON.stringify(highscores));
+    
+    // redirect to next page
+    window.location.href = "highscores.html";
+  }
 }
 
 function checkForEnter(event) {
   // check if event key is enter
   // saveHighscore
+  if (event.key === "Enter") {
+    saveHighscore();
+  }
 }
 
 // user clicks button to submit initials
