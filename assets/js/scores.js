@@ -20,17 +20,14 @@ function printHighscores() {
 
 function clearHighscores() {
   // (and reload)
-  window.localStorage.removeItem("highscores");
+  window.localStorage.addItem("highscores");
   window.location.reload();
 }
-
+var clearScores = document.getElementById('clear')
 // attache clear event to clear score button
 clearScores.addEventListener("click", function () {
     clearAll();
     window.location.href = "highscores.html";
-})
-backButton.addEventListener("click", function () {
-    window.location.href = "index.html";
 })
 
 // run printhighscore when page loads
@@ -53,13 +50,7 @@ var restartBtn = document.querySelector("button.restartBtn"),
         newLi.textContent = highScores[s].name + " - " + highScores[s].score
         scoreList.appendChild(newLi)
     }
-
-
-// click handlers for restart and clearing scoreboard
-clearBtn.addEventListener("click", function () {
-    localStorage.clear();
-    history.back()
-});
-restartBtn.addEventListener("click", function () {
-    history.back();
-});
+function clearAll()
+{
+  localStorage.clear();
+}
