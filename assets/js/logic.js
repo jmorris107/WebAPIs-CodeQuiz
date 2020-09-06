@@ -26,7 +26,7 @@ function startQuiz() {
   setInterval(function() {
     time--
     timerEl.textContent = time;
-
+// Game Over alert when time is over
     if (time <= 0) {
       alert("Game Over ");
       clearInterval(myInterval);
@@ -77,13 +77,12 @@ function questionClick() {
     // play "right" sound effect
     sfxRight.play();
     // add 1 to currentQuestionIndex
-    currentQuestionIndex = currentQuestionIndex + 1
-    // call the get questions function again
-      // move to next question
+    currentQuestionIndex = currentQuestionIndex + 1   // move to next question
+    
       if (currentQuestionIndex === questions.length) {
-        quizEnd();
+        quizEnd();  // call the quiz end function again
       } else {
-        getQuestion();
+        getQuestion();  // call the get questions function again
       }
  }
     else {
@@ -100,9 +99,9 @@ function questionClick() {
           
   // check if we've run out of questions
   if (currentQuestionIndex === questions.length) {
-    quizEnd();
+    quizEnd(); // call the quiz end function again
   } else {
-    getQuestion();
+    getQuestion(); // call the get questions function again
   }
 }
  
