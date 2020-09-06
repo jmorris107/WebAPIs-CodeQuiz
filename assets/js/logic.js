@@ -67,8 +67,9 @@ function questionClick() {
   
   var question = questions[currentQuestionIndex];
 
-  console.log(question.answer);
+  
   // check if user guessed right
+  console.log(question.answer);
   if (this.value === question.answer) {
     // add 1 to the number of correct guesses
     feedbackEl.style.display = "block";
@@ -79,7 +80,11 @@ function questionClick() {
     currentQuestionIndex = currentQuestionIndex + 1
     // call the get questions function again
       // move to next question
-    getQuestion(); 
+      if (currentQuestionIndex === questions.length) {
+        quizEnd();
+      } else {
+        getQuestion();
+      }
  }
     else {
     feedbackEl.style.display = "block";
